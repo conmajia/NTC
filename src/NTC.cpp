@@ -22,35 +22,39 @@
 #include "Arduino.h"
 
 // constructors
+NTC::NTC() {
+    this->_pin = NTC_NA;
+}
 NTC::NTC(int pin) {
-    _pin = pin;
+    this->_pin = pin;
 }
 NTC::NTC(int pin, int value) : NTC(pin) {
-    _ntc = value;
+    this->_ntc = value;
 }
 NTC::NTC(int pin, int value, int b) : NTC(pin, value) {
-    _b = b;
+    this->_b = b;
 }
-
 ///////////////////////////////////
 // Public funtions
 ///////////////////////////////////
 float NTC::celsius() {
-    float average = 0;
-    for (int i = 0; i < _repeat; i++) {
-        average = average + analogRead(_pin);
-        if (_repeat > 1) delay(10);
+    int raw = 0;
+    for (int i = 0; i < this->_repeat; i++) {
+        raw += analogRead(this->_pin);
+        if (this->_repeat > 1) delay(10);
     }
-    average = average / _repeat;
+    raw /= this->_repeat;
+    float average;
+    average = raw / this->_repeat;
     // calculate for temperature
     average = 1023 / average - 1;
-    average = _resistor / average;
+    average = this->_resistor / average;
     // Steinhart-Hart Equation
     // ARef = 5V
     float celsius;
-    celsius = average / _ntc;
+    celsius = average / this->_ntc;
     celsius = log(celsius);
-    celsius = celsius / _b;
+    celsius = celsius / this->_b;
     celsius = celsius + 1.0 / (NTC_DEFAULT_T - NTC_ABSOLUTE_ZERO);
     celsius = 1.0 / celsius;
     celsius = celsius + NTC_ABSOLUTE_ZERO;

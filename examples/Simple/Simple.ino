@@ -32,6 +32,8 @@ void loop() {
   // read temperature
   Serial.print("Temperature: ");
   Serial.print(t.celsius());
-  Serial.println(" Celcius.");
+  Serial.print(" Celcius, ");
+  Serial.print(t.fahrenheit());
+  Serial.println(" Fahrenheit.");
   delay(1000);
 }

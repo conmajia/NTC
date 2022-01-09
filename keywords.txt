@@ -6,16 +6,14 @@
 # Datatypes (KEYWORD1)
 #######################################
 
-NTC                 KEYWORD1
+NTC KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
 
-setRepeat           KEYWORD2
-getRepeat           KEYWORD2
-celsius             KEYWORD2
-fahrenheit          KEYWORD2
+celsius KEYWORD2
+fahrenheit KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
